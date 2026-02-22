@@ -1,34 +1,4 @@
-'''
-from langchain_ollama import OllamaEmbeddings
-from langchain_qdrant import QdrantVectorStore
 
-#vectorembedding model call
-embedding_model = OllamaEmbeddings(
-    model="nomic-embed-text",
-)
-
-#vectordb connection , here we use from exisitng collection that we created in indexing process
-vector_db = QdrantVectorStore.from_existing_collection(embedding=embedding_model,
-    url="http://localhost:6333",
-    collection_name="learning_RAG",
-    force_recreate = True)
-
-user_query = input("What would you like to know?")
-
-#similarity search: 
-search_results = vector_db.similarity_search(query = user_query)
-
-context = "\n\n\n".join([f"Page Content: {result.page_content}\nPage number: {result.metadata['page_label']}\n File Location: {result.metadata['soure']}" for result in search_results])
-
-SYSTEM_PROMPT = f"""
-Your are a helpful AI assitant, who answeres userquery based on the available context retrieved from a pdf file along with page_content and page_number. 
-
-You should only answer the user based on the following context and navigate the user to open the right page number to know more.
-
-context:
-{context}
-"""
-'''
 
 
 from fastapi import FastAPI, Body
