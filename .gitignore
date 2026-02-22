@@ -1,0 +1,11 @@
+# Data folders (Very important!)
+ollama_data/
+qdrant_data/
+__pycache__/
+
+# Environment variables
+
+
+# OS specific
+.DS_Store
+Thumbs.db
